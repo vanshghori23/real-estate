@@ -14,8 +14,14 @@ const userSchema = new mongoose.Schema({
     password: {
       type: String,
       required: true,
-    }
-},{ timestamps: true });
+    },
+    avatar:{
+      type: String,
+      default: "https://img.freepik.com/premium-vector/silver-membership-icon-default-avatar-profile-icon-membership-icon-social-media-user-image-vector-illustration_561158-4195.jpg"
+    },
+  },
+  { timestamps: true }
+);
 
 const User = mongoose.model('User', userSchema);
 
