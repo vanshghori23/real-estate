@@ -1,5 +1,6 @@
 import bcryptjs from 'bcryptjs';
 import User from '../models/user.model.js';
+import { errorHandler } from '../utils/error.js';
 
 export const test = (req, res) => {
     res.json({ message: 'Api is working' });
@@ -33,7 +34,7 @@ export const updateUser = async (req, res, next) => {
         }
 
         const { password, ...rest } = updatedUser._doc;
-        
+
         res.status(200).json(rest);
         
     } catch (error) {
