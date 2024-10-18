@@ -17,6 +17,8 @@ import {
   signOutUserStart
 } from '../redux/user/userSlice';
 import { useDispatch } from 'react-redux';
+import { Link } from 'react-router-dom';
+
 export default function Profile() {
   const fileRef = useRef(null);
   const { currentUser, loading, error } = useSelector((state) => state.user);
@@ -26,8 +28,6 @@ export default function Profile() {
   const [formData, setFormData] = useState({});
   const [updateSuccess, setUpdateSuccess] = useState(false);
   const dispatch = useDispatch();
-
-  
 
   useEffect(() => {
     if (file) {
@@ -41,13 +41,10 @@ export default function Profile() {
     const storageRef = ref(storage, fileName);
     const uploadTask = uploadBytesResumable(storageRef, file);
 
-
-
     uploadTask.on(
       'state_changed',
       (snapshot) => {
-        const progress =
-          (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+        const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
         setFilePerc(Math.round(progress));
       },
       (error) => {
@@ -117,83 +114,96 @@ export default function Profile() {
       }
       dispatch(deleteUserSuccess(data));
     } catch (error) {
-      dispatch(deleteUserFailure(data.message));
+      dispatch(deleteUserFailure(error.message));
     }
   };
   
   return (
-    <div className='p-3 max-w-lg mx-auto'>
-      <h1 className='text-3xl font-semibold text-center my-7'>Profile</h1>
-      <form onSubmit={handleSubmit} className='flex flex-col gap-4'>
+    <div className='bg-gradient-to-r from-blue-100 to-white min-h-screen flex items-center justify-center'>
+  <div className='p-8 w-full max-w-md bg-gray-50 shadow-lg rounded-lg'>
+    <h1 className='text-4xl font-bold text-gray-800 mb-6 text-center'>Profile</h1>
+    <form onSubmit={handleSubmit} className='flex flex-col'>
       <input
-          onChange={(e) => setFile(e.target.files[0])}
-          type='file'
-          ref={fileRef}
-          hidden
-          accept='image/*'
+        onChange={(e) => setFile(e.target.files[0])}
+        type='file'
+        ref={fileRef}
+        hidden
+        accept='image/*'
+      />
+      <div className='flex flex-col items-center mb-4'>
+        <img 
+          onClick={() => fileRef.current.click()} 
+          src={formData.avatar || currentUser.avatar} 
+          alt="profile"
+          className='rounded-full h-32 w-32 object-cover cursor-pointer border-4 border-gray-300 transition duration-300 hover:border-blue-400 mb-3 shadow-md'
         />
-        <img onClick={() => fileRef.current.click()} 
-        src={formData.avatar || currentUser.avatar} alt="profile"
-        className='rounded-full h-24 w-24 object-cover cursor-pointer self-center mt-2'/>
-        <p className='text-lg self-center'>
+        <p className='text-center text-sm text-gray-600'>
           {fileUploadError ? (
-            <span className='text-red-700'>
-              Error Image uploading an Image (Image must be less than 2 MB)
+            <span className='text-red-600'>
+              Error uploading image (must be less than 2 MB)
             </span>
           ) : filePerc > 0 && filePerc < 100 ? (
-            <span className='text-slate-700'>{`Uploading...${filePerc}%`}</span>
+            <span className='text-gray-600'>{`Uploading... ${filePerc}%`}</span>
           ) : filePerc === 100 ? (
-            <span className='text-green-'>Image has been uploaded successfully!</span>
-          ) : (
-            ''
-          )}
+            <span className='text-green-600'>Image uploaded successfully!</span>
+          ) : null}
         </p>
-        <input
-          type='text'
-          placeholder='username'
-          defaultValue={currentUser.username}
-          id='username'
-          className='border p-3 rounded-lg'
-          onChange={handleChange}
-        />
-        <input
-          type='email'
-          placeholder='email'
-          id='email'
-          defaultValue={currentUser.email}
-          className='border p-3 rounded-lg'
-          onChange={handleChange}
-        />
-        <input
-          type='password'
-          placeholder='password'
-          onChange={handleChange}
-          id='password'
-          className='border p-3 rounded-lg'
-        />
-        <button
-          disabled={loading}
-          className='bg-slate-700 text-white rounded-lg p-3 uppercase hover:opacity-95 disabled:opacity-80'
-        >
-          {loading ? 'Loading...' : 'Update'}
-        </button>
-      </form>
-      <div className='flex justify-between mt-5'>
-        <span
-          onClick={handleDeleteUser}
-          className='text-red-700 cursor-pointer'
-        >
-          Delete Account?
-        </span>
-        <span onClick={handleSignOut} className='text-red-700 cursor-pointer'>
-          Sign out
-        </span>
       </div>
-
-      <p className='text-red-700 mt-5'>{error ? error : ''}</p>
-      <p className='text-green-700 mt-5'>
-        {updateSuccess ? 'User is updated successfully!' : ''}
-      </p>
+      <input
+        type='text'
+        placeholder='Username'
+        defaultValue={currentUser.username}
+        id='username'
+        className='border border-gray-300 p-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-300 mb-4 w-full'
+        onChange={handleChange}
+        required
+      />
+      <input
+        type='email'
+        placeholder='Email'
+        id='email'
+        defaultValue={currentUser.email}
+        className='border border-gray-300 p-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-300 mb-4 w-full'
+        onChange={handleChange}
+        required
+      />
+      <input
+        type='password'
+        placeholder='Password'
+        onChange={handleChange}
+        id='password'
+        className='border border-gray-300 p-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-300 mb-6 w-full'
+      />
+      <button
+        disabled={loading}
+        className='w-full bg-blue-600 text-white rounded-lg p-4 uppercase hover:bg-blue-700 transition duration-300 disabled:bg-gray-400 mb-4'
+      >
+        {loading ? 'Loading...' : 'Update'}
+      </button>
+      <Link
+        className='w-full bg-gray-800 text-white p-4 rounded-lg uppercase text-center hover:bg-gray-700 transition duration-300'
+        to={'/create-listing'}
+      >
+        Create Your Listing
+      </Link>
+    </form>
+    <div className='flex justify-between w-full mt-6'>
+      <span
+        onClick={handleDeleteUser}
+        className='text-red-600 cursor-pointer hover:underline'
+      >
+        Delete Account?
+      </span>
+      <span onClick={handleSignOut} className='text-red-600 cursor-pointer hover:underline'>
+        Sign Out
+      </span>
     </div>
-  )
+    <p className='text-red-600 mt-4'>{error ? error : ''}</p>
+    <p className='text-green-600 mt-4'>
+      {updateSuccess ? 'User updated successfully!' : ''}
+    </p>
+  </div>
+</div>
+
+  );
 }
