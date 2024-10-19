@@ -156,7 +156,7 @@ export default function CreateListing() {
   };
 
   return (
-    <div className='bg-gradient-to-r from-blue-100 to-white min-h-screen flex items-center justify-center'>
+    <div className='bg-gradient-to-r from-blue-200 to-white min-h-screen flex items-center justify-center'>
       <div className='p-8 w-full max-w-4xl bg-gray-50 shadow-lg rounded-lg'>
         <h1 className='text-4xl font-bold text-gray-800 mb-6 text-center'>Create a Listing</h1>
         <form onSubmit={handleSubmit} className='flex flex-col sm:flex-row gap-4'>
