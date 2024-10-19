@@ -382,7 +382,7 @@ export default function CreateListing() {
             className='bg-green-500 text-white p-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 transition duration-300 w-full'
             disabled={loading}
           >
-            {loading ? 'Loading...' : 'Update Listing'}
+            {loading ? 'Updating...' : 'Update Listing'}
           </button>
         </div>
         {error && <p className='text-red-500 text-center mt-4'>{error}</p>}

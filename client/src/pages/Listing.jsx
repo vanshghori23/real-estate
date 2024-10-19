@@ -61,9 +61,7 @@ export default function Listing() {
             <Swiper navigation className='rounded-lg shadow-lg'>
               {listing.imageUrls.map((url) => (
                 <SwiperSlide key={url}>
-                  <div
-                    className='h-[550px] rounded-lg overflow-hidden relative'
-                  >
+                  <div className='h-[550px] rounded-lg overflow-hidden relative'>
                     <div
                       className='absolute inset-0 bg-black bg-opacity-25 hover:bg-opacity-10 transition duration-300'
                       style={{
@@ -94,13 +92,13 @@ export default function Listing() {
               </p>
             )}
           </div>
-          
+
           <div className='bg-white shadow-lg rounded-lg p-8 mt-8'>
             <p className='text-3xl font-semibold text-gray-800'>
-              {listing.name} - ${' '}
+              {listing.name} - ₹{' '}
               {listing.offer
-                ? listing.discountPrice.toLocaleString('en-US')
-                : listing.regularPrice.toLocaleString('en-US')}
+                ? listing.discountPrice.toLocaleString('en-IN')
+                : listing.regularPrice.toLocaleString('en-IN')}
               {listing.type === 'rent' && ' / month'}
             </p>
             <p className='flex items-center mt-4 gap-2 text-gray-600 text-lg'>
@@ -113,7 +111,7 @@ export default function Listing() {
               </p>
               {listing.offer && (
                 <p className='bg-green-700 text-white text-center py-2 px-4 rounded-lg shadow-md'>
-                  ${+listing.regularPrice - +listing.discountPrice} OFF
+                  ₹{(listing.regularPrice - listing.discountPrice).toLocaleString('en-IN')} OFF
                 </p>
               )}
             </div>
