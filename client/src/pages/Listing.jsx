@@ -54,11 +54,12 @@ export default function Listing() {
       {error && <p className='text-center my-7 text-2xl'>Something went wrong!</p>}
       {listing && !loading && !error && (
         <div className='max-w-7xl mx-auto p-5'>
+          {/* Swiper Section */}
           <div className='relative'>
             <Swiper navigation className='rounded-lg shadow-lg'>
               {listing.imageUrls.map((url) => (
                 <SwiperSlide key={url}>
-                  <div className='h-[250px] sm:h-[400px] md:h-[550px] rounded-lg overflow-hidden relative'>
+                  <div className='h-[200px] sm:h-[300px] md:h-[400px] lg:h-[500px] rounded-lg overflow-hidden relative'>
                     <div
                       className='absolute inset-0 bg-black bg-opacity-25 hover:bg-opacity-10 transition duration-300'
                       style={{
@@ -71,7 +72,7 @@ export default function Listing() {
                 </SwiperSlide>
               ))}
             </Swiper>
-            <div className='fixed top-[10%] right-[3%] z-10 border rounded-full w-12 h-12 flex justify-center items-center bg-white shadow-lg cursor-pointer'>
+            <div className='fixed top-3 right-3 z-10 border rounded-full w-10 h-10 flex justify-center items-center bg-white shadow-lg cursor-pointer'>
               <FaShare
                 className='text-gray-500'
                 onClick={() => {
@@ -84,20 +85,21 @@ export default function Listing() {
               />
             </div>
             {copied && (
-              <p className='fixed top-[20%] right-[5%] z-10 rounded-md bg-white p-2 shadow-lg'>
+              <p className='fixed top-16 right-5 z-10 rounded-md bg-white p-2 shadow-lg'>
                 Link copied!
               </p>
             )}
           </div>
 
+          {/* Listing Details */}
           <div className='bg-white shadow-lg rounded-lg p-5 sm:p-8 mt-8'>
-            <p className='text-2xl sm:text-3xl font-semibold text-gray-800'>
+            <h2 className='text-2xl sm:text-3xl font-semibold text-gray-800'>
               {listing.name} - ₹{' '}
               {listing.offer
                 ? listing.discountPrice.toLocaleString('en-IN')
                 : listing.regularPrice.toLocaleString('en-IN')}
               {listing.type === 'rent' && ' / month'}
-            </p>
+            </h2>
             <p className='flex items-center mt-4 gap-2 text-gray-600 text-lg'>
               <FaMapMarkerAlt className='text-green-600' />
               {listing.address}
