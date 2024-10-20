@@ -48,7 +48,7 @@ export default function Listing() {
   }, [params.listingId]);
 
   return (
-    <main className="bg-gray-100">
+    <main className='bg-gradient-to-r from-blue-200 min-h-screen'>
       {loading && <p className="text-center my-7 text-2xl">Loading...</p>}
       {error && (
         <p className="text-center my-7 text-2xl text-red-600">Something went wrong!</p>
