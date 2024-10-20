@@ -51,9 +51,7 @@ export default function Listing() {
   return (
     <main className='bg-gradient-to-r from-blue-200 min-h-screen flex items-center justify-center'>
       {loading && <p className='text-center my-7 text-2xl'>Loading...</p>}
-      {error && (
-        <p className='text-center my-7 text-2xl'>Something went wrong!</p>
-      )}
+      {error && <p className='text-center my-7 text-2xl'>Something went wrong!</p>}
       {listing && !loading && !error && (
         <div className='max-w-7xl mx-auto p-5'>
           {/* Updated Swiper section */}
@@ -61,7 +59,7 @@ export default function Listing() {
             <Swiper navigation className='rounded-lg shadow-lg'>
               {listing.imageUrls.map((url) => (
                 <SwiperSlide key={url}>
-                  <div className='h-[300px] sm:h-[400px] md:h-[550px] rounded-lg overflow-hidden relative'>
+                  <div className='h-[250px] sm:h-[400px] md:h-[550px] rounded-lg overflow-hidden relative'>
                     <div
                       className='absolute inset-0 bg-black bg-opacity-25 hover:bg-opacity-10 transition duration-300'
                       style={{
@@ -150,7 +148,7 @@ export default function Listing() {
             {currentUser && listing.userRef !== currentUser._id && !contact && (
               <button
                 onClick={() => setContact(true)}
-                className='bg-blue-600 text-white mt-6 py-3 px-6 rounded-lg shadow-lg hover:bg-blue-700 transition duration-300'
+                className='bg-blue-600 text-white w-full mt-6 py-3 rounded-lg shadow-lg hover:bg-blue-700 transition duration-300'
               >
                 Contact landlord
               </button>
