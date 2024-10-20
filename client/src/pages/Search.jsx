@@ -128,8 +128,8 @@ export default function Search() {
   };
 
   return (
-    <div className='flex flex-col md:flex-row gap-6 bg-gradient-to-r from-blue-300'>
-      <div className='p-6 bg-gray-300 shadow-md rounded-lg w-full md:w-1/4'>
+    <div className='flex flex-col md:flex-row gap-6 bg-gradient-to-r from-blue-200'>
+      <div className='p-6 bg-slate-300  shadow-md rounded-lg w-full md:w-1/4'>
         <form onSubmit={handleSubmit} className='flex flex-col gap-6'>
           <div className='flex flex-col gap-2'>
             <label className='font-semibold text-lg'>Search Term:</label>
