@@ -49,12 +49,11 @@ export default function Listing() {
   }, [params.listingId]);
 
   return (
-    <main className='bg-gradient-to-r from-blue-400 min-h-screen flex items-center justify-center'>
+    <main className='bg-gradient-to-r from-blue-200 min-h-screen flex items-center justify-center'>
       {loading && <p className='text-center my-7 text-2xl'>Loading...</p>}
       {error && <p className='text-center my-7 text-2xl'>Something went wrong!</p>}
       {listing && !loading && !error && (
         <div className='max-w-7xl mx-auto p-5'>
-          {/* Updated Swiper section */}
           <div className='relative'>
             <Swiper navigation className='rounded-lg shadow-lg'>
               {listing.imageUrls.map((url) => (
