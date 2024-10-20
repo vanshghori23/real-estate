@@ -49,7 +49,7 @@ export default function Listing() {
   }, [params.listingId]);
 
   return (
-    <main className='min-h-screen bg-gradient-to-r from-slate-300 to-blue-300'>
+    <main className='bg-gradient-to-r from-blue-200 min-h-screen flex items-center justify-center'>
       {loading && <p className='text-center my-7 text-2xl'>Loading...</p>}
       {error && (
         <p className='text-center my-7 text-2xl'>Something went wrong!</p>

@@ -45,9 +45,9 @@ export default function SignIn() {
   };
 
   return (
-    <div className='bg-gradient-to-r from-blue-200 to-white min-h-screen flex items-center justify-center p-4'>
-      <div className='p-6 sm:p-10 w-full max-w-md bg-white shadow-lg rounded-lg border border-gray-200'>
-        <h1 className='text-3xl sm:text-4xl font-bold text-gray-800 mb-6 text-center'>Welcome!</h1>
+    <div className='bg-gradient-to-r from-blue-200 min-h-screen flex items-center justify-center'>
+      <div className='p-10 w-full max-w-md bg-white shadow-lg rounded-lg border border-gray-200'>
+        <h1 className='text-4xl font-bold text-gray-800 mb-6 text-center'>Welcome Back!</h1>
         <form onSubmit={handleSubmit} className='flex flex-col'>
           <input
             type='email'
