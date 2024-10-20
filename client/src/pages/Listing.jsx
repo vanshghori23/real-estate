@@ -61,7 +61,7 @@ export default function Listing() {
             <Swiper navigation className='rounded-lg shadow-lg'>
               {listing.imageUrls.map((url) => (
                 <SwiperSlide key={url}>
-                  <div className='h-[550px] rounded-lg overflow-hidden relative'>
+                  <div className='h-[300px] sm:h-[400px] md:h-[550px] rounded-lg overflow-hidden relative'>
                     <div
                       className='absolute inset-0 bg-black bg-opacity-25 hover:bg-opacity-10 transition duration-300'
                       style={{
@@ -74,7 +74,7 @@ export default function Listing() {
                 </SwiperSlide>
               ))}
             </Swiper>
-            <div className='fixed top-[13%] right-[3%] z-10 border rounded-full w-12 h-12 flex justify-center items-center bg-white shadow-lg cursor-pointer'>
+            <div className='fixed top-[10%] right-[3%] z-10 border rounded-full w-12 h-12 flex justify-center items-center bg-white shadow-lg cursor-pointer'>
               <FaShare
                 className='text-gray-500'
                 onClick={() => {
@@ -87,14 +87,14 @@ export default function Listing() {
               />
             </div>
             {copied && (
-              <p className='fixed top-[23%] right-[5%] z-10 rounded-md bg-white p-2 shadow-lg'>
+              <p className='fixed top-[20%] right-[5%] z-10 rounded-md bg-white p-2 shadow-lg'>
                 Link copied!
               </p>
             )}
           </div>
 
-          <div className='bg-white shadow-lg rounded-lg p-8 mt-8'>
-            <p className='text-3xl font-semibold text-gray-800'>
+          <div className='bg-white shadow-lg rounded-lg p-5 sm:p-8 mt-8'>
+            <p className='text-2xl sm:text-3xl font-semibold text-gray-800'>
               {listing.name} - ₹{' '}
               {listing.offer
                 ? listing.discountPrice.toLocaleString('en-IN')
@@ -105,7 +105,7 @@ export default function Listing() {
               <FaMapMarkerAlt className='text-green-600' />
               {listing.address}
             </p>
-            <div className='flex gap-4 mt-4'>
+            <div className='flex flex-col sm:flex-row gap-4 mt-4'>
               <p className='bg-red-700 text-white text-center py-2 px-4 rounded-lg shadow-md'>
                 {listing.type === 'rent' ? 'For Rent' : 'For Sale'}
               </p>
