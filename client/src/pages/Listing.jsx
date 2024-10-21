@@ -47,17 +47,6 @@ export default function Listing() {
     fetchListing();
   }, [params.listingId]);
 
-  // Calculate final price and brokerage
-  const calculateFinalPrice = () => {
-    if (!listing) return 0;
-    return listing.offer ? listing.discountPrice : listing.regularPrice;
-  };
-
-  const calculateBrokerage = () => {
-    const finalPrice = calculateFinalPrice();
-    return finalPrice * 0.02; // 2% brokerage
-  };
-
   return (
     <main className='bg-gradient-to-r from-blue-200 min-h-screen'>
       {loading && <p className="text-center my-7 text-2xl">Loading...</p>}
@@ -102,9 +91,28 @@ export default function Listing() {
           <div className="bg-white shadow-lg rounded-lg p-5 mt-5">
             <h1 className="text-3xl font-semibold">
               {listing.name} - ₹{' '}
-              {calculateFinalPrice().toLocaleString('en-IN')}
+              {listing.offer
+                ? listing.discountPrice.toLocaleString('en-IN')
+                : listing.regularPrice.toLocaleString('en-IN')}
               {listing.type === 'rent' && ' / month'}
             </h1>
+
+            {/* Calculate and display brokerage */}
+            {listing.offer ? listing.discountPrice : listing.regularPrice
+              ? (
+                <p className="mt-2 text-gray-600">
+                  Total Amount (including 2% brokerage): ₹{' '}
+                  {(listing.offer
+                    ? listing.discountPrice * 1.02
+                    : listing.regularPrice * 1.02).toLocaleString('en-IN')}
+                </p>
+              )
+              : null
+            }
+            <p className="text-gray-600 text-sm">
+              *2% platform brokerage included in total amount.
+            </p>
+
             <p className="flex items-center mt-2 text-gray-600 text-sm">
               <FaMapMarkerAlt className="text-green-700" />
               {listing.address}
@@ -143,14 +151,10 @@ export default function Listing() {
                 {listing.furnished ? 'Furnished' : 'Unfurnished'}
               </li>
               <li className="flex items-center gap-1">
-                <FaKitchen className="text-lg" />
+                <FaKitchen className="text-lg" /> {/* Add kitchen icon */}
                 {listing.kitchen ? 'Kitchen available' : 'No Kitchen'}
               </li>
             </ul>
-
-            <div className="mt-4">
-              <span className="font-semibold">Brokerage (2%):</span> ₹{calculateBrokerage().toLocaleString('en-IN')}
-            </div>
 
             {currentUser && listing.userRef !== currentUser._id && !contact && (
               <button
