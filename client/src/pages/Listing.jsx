@@ -96,23 +96,6 @@ export default function Listing() {
                 : listing.regularPrice.toLocaleString('en-IN')}
               {listing.type === 'rent' && ' / month'}
             </h1>
-
-            {/* Calculate and display brokerage */}
-            {listing.offer ? listing.discountPrice : listing.regularPrice
-              ? (
-                <p className="mt-2 text-gray-600">
-                  Total Amount (including 2% brokerage): ₹{' '}
-                  {(listing.offer
-                    ? listing.discountPrice * 1.02
-                    : listing.regularPrice * 1.02).toLocaleString('en-IN')}
-                </p>
-              )
-              : null
-            }
-            <p className="text-gray-600 text-sm">
-              *2% platform brokerage included in total amount.
-            </p>
-
             <p className="flex items-center mt-2 text-gray-600 text-sm">
               <FaMapMarkerAlt className="text-green-700" />
               {listing.address}
@@ -149,10 +132,6 @@ export default function Listing() {
               <li className="flex items-center gap-1">
                 <FaChair className="text-lg" />
                 {listing.furnished ? 'Furnished' : 'Unfurnished'}
-              </li>
-              <li className="flex items-center gap-1">
-                <FaKitchen className="text-lg" /> {/* Add kitchen icon */}
-                {listing.kitchen ? 'Kitchen available' : 'No Kitchen'}
               </li>
             </ul>
 
