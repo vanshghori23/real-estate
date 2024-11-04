@@ -12,8 +12,8 @@ import {
   FaMapMarkerAlt,
   FaParking,
   FaShare,
+  FaUtensils, // Import kitchen icon
 } from 'react-icons/fa';
-import Contact from '../components/Contact';
 
 export default function Listing() {
   SwiperCore.use([Navigation]);
@@ -21,7 +21,6 @@ export default function Listing() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
   const [copied, setCopied] = useState(false);
-  const [contact, setContact] = useState(false);
   const params = useParams();
   const { currentUser } = useSelector((state) => state.user);
 
@@ -119,11 +118,11 @@ export default function Listing() {
             <ul className="text-gray-700 font-medium text-sm flex flex-wrap items-center gap-4 mt-4">
               <li className="flex items-center gap-1">
                 <FaBed className="text-lg" />
-                {listing.bedrooms > 1 ? `${listing.bedrooms} beds` : `${listing.bedrooms} bed`}
+                {listing.bedrooms > 1 ? `${listing.bedrooms} beds` : `${listing.bedrooms} Bed`}
               </li>
               <li className="flex items-center gap-1">
                 <FaBath className="text-lg" />
-                {listing.bathrooms > 1 ? `${listing.bathrooms} baths` : `${listing.bathrooms} bath`}
+                {listing.bathrooms > 1 ? `${listing.bathrooms} baths` : `${listing.bathrooms} Bath`}
               </li>
               <li className="flex items-center gap-1">
                 <FaParking className="text-lg" />
@@ -133,17 +132,22 @@ export default function Listing() {
                 <FaChair className="text-lg" />
                 {listing.furnished ? 'Furnished' : 'Unfurnished'}
               </li>
+              <li className="flex items-center gap-1"> {/* New kitchen section */}
+                <FaUtensils className="text-lg" />
+                {listing.kitchen ? 'Kitchen' : 'No Kitchen'}
+              </li>
             </ul>
 
-            {currentUser && listing.userRef !== currentUser._id && !contact && (
-              <button
-                onClick={() => setContact(true)}
-                className="bg-blue-600 text-white rounded-lg uppercase hover:bg-blue-700 transition duration-300 p-3 mt-4 w-full"
-              >
-                Contact Landlord
-              </button>
+            {currentUser && listing.userRef !== currentUser._id && (
+              <div className="mt-8">
+                <a
+                  href="mailto:sq.squarefeet@gmail.com?subject=Inquiry about the listing&body=I'm interested in this property. Please provide more details."
+                  className="block bg-blue-600 text-white rounded-lg uppercase text-center hover:bg-blue-700 transition duration-300 p-3 w-full"
+                >
+                  Contact Agent
+                </a>
+              </div>
             )}
-            {contact && <Contact listing={listing} />}
           </div>
         </div>
       )}
